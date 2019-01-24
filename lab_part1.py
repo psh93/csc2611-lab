@@ -6,7 +6,7 @@ from gensim.models import LsiModel
 import numpy as np
 import math
 
-########################### Part 1 ############################
+#### Part 1 ####
 
 ## Step 2 ##
 
@@ -171,7 +171,7 @@ for d in dim:
     pscores = S3[d]
     print("LSA (dim = %d): %.4f" % (d, stats.pearsonr(S, pscores)[0]))
 
-########################### Part 2 ############################
+#### Part 2 ####
 
 from gensim.models import KeyedVectors
 bpath = './GoogleNews-vectors-negative300.bin'
@@ -223,19 +223,19 @@ for line in open(apath, 'r').readlines():
 # Find the vector(word) that is closest to the given vector.
 def most_similar(v1, d):
 
-    min_cos = 10
-    min_i = 0 
+    max_cos = 10
+    max_i = 0 
     for i in range(len(W)):
 
         v2 = lsa_models[d][i]
         similarity = cosine(v1, v2)
 
-        if min_cos > similarity:
+        if max_cos < similarity:
 
-            min_cos = similarity
-            min_i = i
+            max_cos = similarity
+            max_i = i
 
-    return min_i
+    return max_i
 
 # Average score is returned after counting correct predictions.
 def accuracy(pred, target):
